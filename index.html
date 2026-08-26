@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Complete Home Today - Growth Playbook</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Azeret+Mono:wght@400;600&family=Barlow:ital,wght@0,400;0,500;0,600;1,400&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --void:#0a0d12; --panel:#12171f; --panel2:#1a212b; --line:#2b3543;
+  --edge:#5c6e80;
+  --text:#dde3ea; --dim:#94a0af; --blue:#6ba0ff; --amber:#ffb84a;
+  --green:#5ad3a4; --red:#ff7b86; --violet:#bda3ff; --pink:#ff8fd0;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{margin:0;background:var(--void);color:var(--text);
+  background-image:linear-gradient(rgba(74,90,110,.16) 1px,transparent 1px),linear-gradient(90deg,rgba(74,90,110,.16) 1px,transparent 1px);
+  background-size:96px 96px;background-position:-1px -1px;background-attachment:fixed;
+  font-family:"Barlow",system-ui,sans-serif;font-size:17px;line-height:1.65}
+.wrap{max-width:900px;margin:0 auto;padding:0 18px 90px}
+
+header.mast{padding:46px 0 22px}
+.tag{display:inline-block;border:1px solid var(--blue);color:var(--blue);font-family:"Azeret Mono",monospace;font-size:11px;letter-spacing:.09em;text-transform:uppercase;padding:5px 10px;margin-bottom:18px}
+h1.big{font-family:"Space Grotesk",sans-serif;font-weight:700;font-size:clamp(32px,8.5vw,60px);line-height:.96;letter-spacing:-.035em;margin:0 0 14px;color:#fff}
+h1.big span{color:var(--amber)}
+.standfirst{font-size:18px;max-width:62ch;margin:0 0 18px;color:#c7d1dd}
+
+nav{position:sticky;top:0;z-index:50;background:rgba(10,13,18,.95);backdrop-filter:blur(8px);border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-bottom:10px}
+.navin{max-width:900px;margin:0 auto;padding:0 12px;display:flex;gap:2px;overflow-x:auto;-webkit-overflow-scrolling:touch}
+.navin::-webkit-scrollbar{height:0}
+nav a{flex:0 0 auto;font-family:"Azeret Mono",monospace;font-size:12.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--text);text-decoration:none;padding:15px 13px;min-height:48px;display:flex;align-items:center;border-bottom:3px solid transparent;white-space:nowrap}
+nav a::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--nc,#fff);margin-right:8px;flex:0 0 auto}
+nav a[data-v="marketing"]{--nc:#6ba0ff}
+nav a[data-v="business"]{--nc:#ffb84a}
+nav a[data-v="office"]{--nc:#5ad3a4}
+nav a[data-v="recruiting"]{--nc:#bda3ff}
+nav a[data-v="plan"]{--nc:#ff7b86}
+nav a.on{color:var(--nc,#fff);border-bottom-color:var(--nc,#fff);background:var(--panel)}
+
+.banner{border-top:3px solid var(--ac,#fff);background:var(--panel);padding:22px 20px;margin:44px 0 8px}
+.banner .num{font-family:"Azeret Mono",monospace;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--ac,#fff)}
+.banner h2{font-family:"Space Grotesk",sans-serif;font-weight:700;font-size:clamp(26px,6.5vw,40px);letter-spacing:-.02em;margin:6px 0 6px;color:#fff}
+.banner p{margin:0;color:var(--dim);font-size:16px}
+
+h3{font-family:"Space Grotesk",sans-serif;font-weight:500;font-size:21px;letter-spacing:-.01em;margin:34px 0 4px;color:#fff}
+.kicker{font-family:"Azeret Mono",monospace;font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--ac,var(--dim));margin-top:30px}
+p{margin:10px 0}
+b,strong{color:#fff;font-weight:600}
+em{color:#fff;font-style:italic}
+
+.step{border:1px solid var(--line);border-left:3px solid var(--ac,#fff);background:var(--panel);padding:16px 16px 14px;margin:14px 0}
+.step.done{opacity:.55}
+.sh{display:flex;gap:12px;align-items:flex-start}
+.sn{font-family:"Azeret Mono",monospace;font-weight:600;font-size:13px;color:var(--ac,#fff);border:1px solid var(--ac,#fff);padding:3px 7px;flex:0 0 auto;margin-top:2px}
+.st{font-family:"Space Grotesk",sans-serif;font-weight:700;font-size:19px;line-height:1.25;color:#fff;margin:0}
+.step ul{margin:12px 0 0;padding-left:20px}
+.step li{margin:6px 0}
+.step ul.tight li{margin:4px 0}
+.done-when{margin:13px 0 0;padding:10px 12px;background:var(--panel2);border-left:2px solid var(--green);font-size:15.5px}
+.done-when b{font-family:"Azeret Mono",monospace;font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--green);display:block;margin-bottom:3px}
+.chk{display:flex;align-items:center;gap:9px;margin-top:12px;font-family:"Azeret Mono",monospace;font-size:11.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--dim);cursor:pointer;user-select:none;min-height:30px}
+.chk input{width:19px;height:19px;accent-color:var(--green);cursor:pointer}
+
+.panel{border:1px solid var(--line);background:var(--panel);padding:16px 18px;margin:20px 0}
+.panel.warn{border-left:3px solid var(--red)}
+.panel.rule{border-left:3px solid var(--amber)}
+.panel h4{font-family:"Space Grotesk",sans-serif;font-size:17px;margin:0 0 8px;color:#fff}
+.panel ul{margin:8px 0 0;padding-left:20px}
+.panel li{margin:5px 0}
+
+.tw{overflow-x:auto;margin:18px 0;-webkit-overflow-scrolling:touch}
+table{border-collapse:collapse;width:100%;min-width:520px;font-size:15.5px}
+th,td{border:1px solid var(--line);padding:9px 11px;text-align:left;vertical-align:top}
+th{background:var(--panel2);font-family:"Azeret Mono",monospace;font-size:11.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--dim);font-weight:400}
+td b{color:#fff}
+tr:nth-child(even) td{background:rgba(255,255,255,.016)}
+
+.calc{border:1px solid var(--edge);background:var(--panel);padding:18px;margin:22px 0}
+.calc h4{font-family:"Space Grotesk",sans-serif;font-size:18px;margin:0 0 4px;color:#fff}
+.calc .sub{color:var(--dim);font-size:14.5px;margin:0 0 14px}
+.fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px}
+.f label{display:block;font-family:"Azeret Mono",monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--dim);margin-bottom:5px}
+.f input{width:100%;background:var(--void);border:1px solid var(--line);color:#fff;font-family:"Azeret Mono",monospace;font-size:16px;padding:10px;min-height:44px}
+.outs{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-top:16px}
+.o{border:1px solid var(--line);background:var(--panel2);padding:11px 12px}
+.o span{display:block;font-family:"Azeret Mono",monospace;font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--dim);margin-bottom:4px}
+.o b{font-family:"Space Grotesk",sans-serif;font-size:24px;color:var(--amber)}
+.o.good b{color:var(--green)}
+.o.bad b{color:var(--red)}
+.verdict{margin-top:14px;padding:11px 13px;border-left:3px solid var(--amber);background:var(--panel2);font-size:15.5px}
+
+.bar{border:1px solid var(--line);background:var(--panel);padding:12px 14px;margin:16px 0;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.bar .lab{font-family:"Azeret Mono",monospace;font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--dim)}
+.track{flex:1 1 160px;height:8px;background:var(--panel2);border:1px solid var(--line)}
+.fill{height:100%;width:0;background:var(--green);transition:width .2s}
+.bar b{font-family:"Azeret Mono",monospace;color:#fff;font-size:14px}
+
+.tl{border-left:2px solid var(--line);margin:20px 0 0;padding-left:0}
+.tli{position:relative;padding:0 0 22px 22px;border-left:2px solid var(--line);margin-left:6px}
+.tli:last-child{border-left-color:transparent}
+.tli::before{content:"";position:absolute;left:-7px;top:4px;width:12px;height:12px;background:var(--ac,#fff);border-radius:50%}
+.tli .when{font-family:"Azeret Mono",monospace;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ac,#fff)}
+.tli .what{font-family:"Space Grotesk",sans-serif;font-weight:700;font-size:18px;color:#fff;margin:3px 0 5px}
+.tli ul{margin:6px 0 0;padding-left:19px}
+.tli li{margin:4px 0}
+.tli .proof{margin-top:7px;font-size:15px;color:var(--dim)}
+.tli .proof b{font-family:"Azeret Mono",monospace;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--green);margin-right:6px}
+
+.hr{border:0;border-top:1px solid var(--line);margin:38px 0}
+footer{border-top:1px solid var(--line);margin-top:50px;padding-top:20px;color:var(--dim);font-size:14px}
+.btn{display:inline-block;font-family:"Azeret Mono",monospace;font-size:12px;letter-spacing:.07em;text-transform:uppercase;color:var(--text);background:var(--panel2);border:1px solid var(--edge);padding:11px 15px;min-height:44px;cursor:pointer;margin:4px 6px 4px 0}
+.btn:hover{color:#fff;background:var(--panel)}
+
+@media (max-width:520px){
+  body{font-size:16.5px}
+  .banner{padding:18px 15px}
+  .step{padding:14px 13px}
+  .sn{font-size:12px;padding:2px 6px}
+}
+@media print{
+  body{background:#fff;color:#000;background-image:none}
+  nav,.btn,.chk,.bar{display:none}
+  .banner{border-top:4px solid #000;background:#fff;page-break-before:always}
+  .panel,.calc,.step,.o{background:#fff;border:1px solid #000}
+  h1.big,h2,.st,.tli .what{color:#000}
+  .step{page-break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="mast">
+  <span class="tag">Complete Home Today LLC / Growth Playbook v1.0</span>
+  <h1 class="big">Do this, <span>in this order</span>.</h1>
+  <p class="standfirst">The full strategy, converted into steps you can start on Monday. Five sections: marketing, business, office growth, recruiting, and the sequenced plan that runs them. Every step has a done-when test, so you always know whether to move on.</p>
+  <p class="standfirst" style="font-size:16px;color:var(--dim)">One rule above all of them: <b>a step is not finished when you have done it once. It is finished when it is boring.</b> Do not start the next thing until the last thing runs without you thinking about it.</p>
+  <button class="btn" id="printBtn">Print / save as PDF</button>
+  <button class="btn" id="resetBtn">Reset checkboxes</button>
+</header>
+</div>
+
+<nav>
+  <div class="navin" id="navin">
+    <a href="#marketing" data-v="marketing">01 Marketing</a>
+    <a href="#business" data-v="business">02 Business</a>
+    <a href="#office" data-v="office">03 Office Growth</a>
+    <a href="#recruiting" data-v="recruiting">04 Recruiting</a>
+    <a href="#plan" data-v="plan">05 The Plan</a>
+  </div>
+</nav>
+
+<div class="wrap">
+
+<div class="bar">
+  <span class="lab">Steps complete</span>
+  <div class="track"><div class="fill" id="fill"></div></div>
+  <b id="cnt">0 / 0</b>
+  <span class="lab" style="color:var(--dim)">resets when you close the page</span>
+</div>
+
+<!-- ============ 01 MARKETING ============ -->
+<section id="marketing" style="--ac:#6ba0ff">
+<div class="banner">
+  <div class="num">Section 01</div>
+  <h2>Marketing</h2>
+  <p>Get attention and demand without ever mentioning money. Nine steps, run in order.</p>
+</div>
+
+<p><b>The positioning, in one line:</b> sell control, not income. You are legally barred from earnings claims and every competitor leads with money anyway. The research says pay is the second reason people leave a job, behind lack of development and uncaring leadership - so you are being forced to lead with the thing that actually works.</p>
+
+<div class="step">
+  <div class="sh"><span class="sn">M1</span><p class="st">Lock the four pillars into every piece of copy</p></div>
+  <ul>
+    <li><b>You decide when you work.</b> "Nobody assigns you a shift."</li>
+    <li><b>Advancement is not a title.</b> "You get better at a skill you keep."</li>
+    <li><b>You will not be managed by a stranger.</b> "The person who trains you knocks with you."</li>
+    <li><b>We tell you what this is.</b> "Commission only. No floor. Plenty of people decide it is not for them."</li>
+  </ul>
+  <p style="margin-top:12px">Never say: an implied schedule, a title ladder, hype culture, urgency or limited spots. Pillar 4 is the whole strategy - honesty is your screening mechanism. Every competitor optimizes for applicant volume. You optimize for fit.</p>
+  <div class="done-when"><b>Done when</b>Your site, your DMs, your reel captions and your rep channel all use the same four sentences, and you can point at the sentence in each place.</div>
+  <label class="chk"><input type="checkbox"> Mark complete</label>
+</div>
+
+<div class="step">
+  <div class="sh"><span class="sn">M2</span><p class="st">Call every install by hand at day 7</p></div>
+  <ul>
+    <li>Not a survey. A conversation. Three questions: why did you say yes, what almost stopped you, who else on this street needs this.</li>
+    <li>Write the answers down verbatim. Their words, not your paraphrase.</li>
+    <li>Run this for eight weeks minimum before you automate anything.</li>
+  </ul>
+  <p style="margin-top:12px">This is the single highest-leverage unscalable thing available to you. It produces your objection list, your referral list and your content calendar at the same time - and it is the one input every serious operator in the source material independently landed on.</p>
+  <div class="done-when"><b>Done when</b>You have a written objection list built from real calls, not from a training deck.</div>
+  <label class="chk"><input type="checkbox"> Mark complete</label>
+</div>
+
+<div class="step">
+  <div class="sh"><span class="sn">M3</span><p class="st">Turn the objection list into your copy</p></div>
+  <ul>
+    <li>The line a homeowner used about why they almost did not buy becomes your next reel script, word for word.</li>
+    <li>Rank objections by frequency. The top three get answered in the first four reels.</li>
+    <li>Same list goes to reps as the standard rebuttal sheet.</li>
+  </ul>
+  <div class="done-when"><b>Done when</b>Your top three objections each have a written answer that a new rep can read out loud at a door.</div>
+  <label class="chk"><input type="checkbox"> Mark complete</label>
+</div>
+
+<div class="step">
+  <div class="sh"><span class="sn">M4</span><p class="st">Automate day 7 and day 90 - only now</p></div>
+  <ul>
+    <li><b>Day 7 SMS:</b> catches install problems before they turn into cancellations.</li>
+    <li><b>Day 90 SMS:</b> asks for the review and the referral at peak happiness.</li>
+    <li>Measure cancellation rate before and after. This is the first number that should visibly move.</li>
+  </ul>
+  <p style="margin-top:12px">Your specific trap: with your tooling skill the instinct is to build the automation first. Manual before automated, every time.</p>
+  <div class="done-when"><b>Done when</b>Cancellation rate is measurably lower than your pre-automation baseline, and you can show the two numbers.</div>
+  <label class="chk"><input type="checkbox"> Mark complete</label>
+</div>
+
+<div class="step">
+  <div class="sh"><span class="sn">M5</span><p class="st">Pick one series banner and never change it</p></div>
+  <ul>
+    <li>Recommended: <b>"Inside a Real Door-to-Door Agency:"</b> - documentary framing, zero promises.</li>
+    <li>Fixed elements, every single post: black banner bar top 12 percent, EP badge, you talking on top half, screen share on bottom half, 2-4 word captions with one word stressed, CTA burned into the low third.</li>
+    <li>30-50 seconds. Start mid-sentence. No greeting, no intro, no name.</li>
+    <li>Bottom half is your unfair advantage - real mapping, real ledger, real routes. Nobody else in D2D recruiting shows actual tooling.</li>
+  </ul>
+  <div class="done-when"><b>Done when</b>Someone who has seen your fifth post recognizes the sixth at a glance.</div>
+  <label class="chk"><input type="checkbox"> Mark complete</label>
+</div>
+
+<div class="step">
+  <div class="sh"><span class="sn">M6</span><p class="st">Post the twelve hooks in order, one per week</p></div>
+  <p style="margin:8px 0 0">Knock them like a street. No skipping houses.</p>
+  <div class="tw"><table>
+    <tr><th>#</th><th>Hook</th><th>Screen share</th></tr>
+    <tr><td>01</td><td>Why do most new reps quit in week two?</td><td>Blank week-two activity log beside a full one</td></tr>
+    <tr><td>02</td><td>What does a full day on the doors actually look like?</td><td>A real route, open to close, timestamped</td></tr>
+    <tr><td>03</td><td>How do you pick which street to knock first?</td><td>Building a non-pen list live</td></tr>
+    <tr><td>04</td><td>What do you say in the first seven seconds?</td><td>Nothing - full frame, delivered twice</td></tr>
+    <tr><td>05</td><td>How do you answer "we already have internet"?</td><td>The serviceability check</td></tr>
+    <tr><td>06</td><td>Why does a serviceability list beat a lead list?</td><td>Pins - penetrated vs open addresses</td></tr>
+    <tr><td>07</td><td>What does the paperwork on one sale take?</td><td>Order flow, start to submitted, unedited</td></tr>
+    <tr><td>08</td><td>What does 1099 really mean here?</td><td>The agreement, the parts people skim</td></tr>
+    <tr><td>09</td><td>What separates a rep who lasts?</td><td>Two anonymized 90-day activity curves</td></tr>
+    <tr><td>10</td><td>What happens after the customer says yes?</td><td>Install scheduling through the survival window</td></tr>
+    <tr><td>11</td><td>How do you knock a summer afternoon?</td><td>Heat-hours routing</td></tr>
+    <tr><td>12</td><td>What would I do differently if I started over?</td><td>Nothing - full frame, longest cut</td></tr>
+  </table></div>
+  <div class="done-when"><b>Done when</b>Twelve published, in sequence, with the first ten comments on each answered by hand within the hour.</div>
+  <label class="chk"><input type="checkbox"> Mark complete</label>
+</div>
+
+<div class="step">
+  <div class="sh"><span class="sn">M7</span><p class="st">Run the comment-to-application funnel</p></div>
+  <p style="margin:8px 0 0">The reel is not the offer. The comment is. One keyword, five touches, hard stop if they go quiet. Every message written to survive a screenshot.</p>
+  <div class="tw"><table>
+    <tr><th>When</th><th>Move</th><th>What it does</th></tr>
+    <tr><td>Under 60 sec, automated</td><td><b>Deliver, do not sell</b></td><td>Send the walkthrough they asked for. No signup. Invite a reply.</td></tr>
+    <tr><td>On reply</td><td><b>Qualify in three</b></td><td>Area, reliable vehicle and smartphone, days per week they actually want.</td></tr>
+    <tr><td>Same day</td><td><b>Set expectations first</b></td><td>1099, commission only, own schedule, no floor and no ceiling. Then the application link.</td></tr>
+    <tr><td>+48 hrs</td><td><b>Book the ride-along</b></td><td>Half a day shadowing a rep. No commitment either side.</td></tr>
+    <tr><td>Day 5, then stop</td><td><b>One nudge, close the loop</b></td><td>Slot still open, no pressure, welcome back anytime.</td></tr>
+  </table></div>
+  <p>Route keyword comments to a saved reply, not a live inbox. Pin your own keyword comment on every post.</p>
+  <div class="done-when"><b>Done when</b>A comment turns into a booked ride-along without you touching it, except for the hand-written replies.</div>
+  <label class="chk"><input type="checkbox"> Mark complete</label>
+</div>
+
+<div class="step">
+  <div class="sh"><span class="sn">M8</span><p class="st">Launch the Creator Corps</p></div>
+  <ul>
+    <li>Audit your own roster first. Who already posts anything? Start there, not with strangers. Ignore follower count - willingness to film the actual day is the only qualifier.</li>
+    <li>One-page content addendum: voluntary participation, usage rights to you, claim rules listed plainly.</li>
+    <li>Give them the raw material every Monday - one hook, one caption, one example. Removing "what do I post" is most of the job.</li>
+    <li>Pay on outcome: a referral bonus when someone they sourced completes a ride-along and onboards.</li>
+    <li><b>Never require posting.</b> Required content from a contractor is a control signal against your 1099 classification.</li>
+    <li>Let everything run organically first, then whitelist only what already performs. Kill anything flat in 72 hours.</li>
+  </ul>
+  <p style="margin-top:12px">One owner posting three times a week loses to fifteen reps posting twice - and the rep footage converts better, because a recruit trusts a rep over an owner.</p>
+  <div class="done-when"><b>Done when</b>At least five reps post in a month without being chased, and you have reposted a named winner every Thursday for four weeks.</div>
+  <label class="chk"><input type="checkbox"> Mark complete</label>
+</div>
+
+<div class="step">
+  <div class="sh"><span class="sn">M9</span><p class="st">Start the founder channel and the credibility layer</p></div>
+  <ul>
+    <li><b>Channel A - Road to $100k/Month.</b> Monthly, published after the month closes. Audience is operators and founders. Numbers allowed, as gross agency revenue. CTA is follow, and nothing else, ever.</li>
+    <li>Standing disclosure on episode 1 and any time the number appears: it is company gross revenue, not profit, not your paycheck, not what a contractor earns.</li>
+    <li><b>Channel B - Complete Home Today.</b> Recruiting. No figure, no range, no top-rep example, ever.</li>
+    <li><b>One-way firewall.</b> A may link to B as "the company account." B never links back. No Channel A clip containing the revenue card appears in any recruiting or whitelisted ad.</li>
+    <li>Credibility, starting now because it compounds slowly: local press, real reviews, a real site. When a recruit searches your name, something credible has to be there.</li>
+  </ul>
+  <div class="done-when"><b>Done when</b>Episode 1 is out with the disclosure, a dated ledger export is filed against it, and the two channels have never touched.</div>
+  <label class="chk"><input type="checkbox"> Mark complete</label>
+</div>
+
+<div class="panel warn">
+  <h4>Marketing guardrails - non-negotiable</h4>
+  <ul>
+    <li><b>No income claims.</b> Not a figure, not a range, not a top-rep example, not a screenshot. Not in the banner, caption, DM or comments.</li>
+    <li><b>No employment language.</b> Never salary, hourly, benefits, hiring, employee or manager.</li>
+    <li><b>Do not script a schedule on camera.</b> Content showing a required start time undercuts the classification.</li>
+    <li><b>Carrier marks and offers.</b> Follow dealer marketing rules. Never burn a price into a reel that lives for months.</li>
+    <li><b>License display.</b> Where security is shown or discussed, display CA ACO #6446.</li>
+    <li><b>Blur customer data.</b> Any screen share touching addresses, names or order details gets masked.</li>
+    <li><b>Reposting is adoption.</b> Never repost a rep post that breaks a rule - it becomes your post.</li>
+  </ul>
+</div>
+
+<div class="kicker">Marketing week, on one line</div>
+<div class="tw"><table>
+  <tr><th>Day</th><th>Move</th></tr>
+  <tr><td><b>Daily</b></td><td>Call one install by hand. A conversation, not a survey.</td></tr>
+  <tr><td><b>Monday</b></td><td>Content prompt to the rep channel - one hook, one caption, one example.</td></tr>
+  <tr><td><b>Tuesday</b></td><td>Publish the week's episode. Answer the first ten comments by hand.</td></tr>
+  <tr><td><b>Thursday</b></td><td>Repost the two best rep posts, named. Recognition is the pay.</td></tr>
+  <tr><td><b>Friday</b></td><td>Kill last week's loser. Whitelist the winner.</td></tr>
+  <tr><td><b>Monthly</b></td><td>Publish the Channel A number. Compliance sweep on tagged content.</td></tr>
+</table></div>
+
+<p class="kicker">The only two metrics worth watching here</p>
+<p><b>Keyword comments per post</b> - the intent signal. Views without comments means the hook worked and the offer did not. <b>Ride-alongs booked per month</b> - the real conversion. Applications are vanity; people apply to everything.</p>
+</section>
+
+<hr class="hr">
+
+<!-- ============ 02 BUSINESS ============ -->
+<section id="business" style="--ac:#ffb84a">
+<div class="banner">
+  <div class="num">Section 02</div>
+  <h2>Business</h2>
+  <p>The operating layer. How you run the company so it does not collapse under its own growth.</p>
+</div>
+
+<p>Marketing is the demand engine. This is the production engine. At scale, this company is not a sales team - it is a <b>system that manufactures productive reps</b>. Run these nine steps continuously, not once.</p>
+
+<div class="step">
+  <div class="sh"><span class="sn">B1</span><p class="st">Run the algorithm, in order, on one system per quarter</p></div>
+  <p style="margin:8px 0 0">Five steps, and the order is the entire point. The costly mistake is optimizing, accelerating and automating a part that turned out not to need to exist.</p>
+  <ul class="tight">
+    <li><b>1. Make the requirements less dumb.</b> Put a person's name next to every rule. If nobody will own a rule, it is not a rule. "An office needs a lease." "Reps need a manager." "Recruiting needs an interview." All inherited, none reasoned.</li>
+    <li><b>2. Delete the part or the process.</b> If you are not forced to put back 10 percent of what you deleted, you did not delete enough.</li>
+    <li><b>3. Simplify what survives.</b> Third for a reason - most people optimize things that should not exist.</li>
+    <li><b>4. Accelerate cycle time.</b> If you are digging your grave, do not dig it faster.</li>
+    <li><b>5. Automate, last.</b> Never first.</li>
+  </ul>
+  <p style="margin-top:12px"><b>Your starting delete list:</b> the daily morning meeting, the title ladder, the screening phone call, the applicant interview, the office lease, paper commission statements. Expect to re-add roughly one - likely a single weekly team touchpoint, not daily and not mandatory.</p>
+  <div class="done-when"><b>Done when</b>You keep a written record of what you deleted each week and whether you had to add it back. That record is the log of what you chose.</div>
+  <label class="chk"><input type="checkbox"> Mark complete</label>
+</div>
+
+<div class="step">
+  <div class="sh"><span class="sn">B2</span><p class="st">Run one scoreboard - six numbers, one diagnosis</p></div>
+  <ul class="tight">
+    <li>Active reps</li>
+    <li>Units installed per month</li>
+    <li>Day-90 survival percent</li>
+    <li>Ride-alongs per month</li>
+    <li>Cells operating</li>
+    <li>Playbook written - yes or no</li>
+  </ul>
+  <p style="margin-top:12px">The scoreboard forecasts nothing. Its only job is to name the <b>single binding constraint</b> so you stop working on the other five. Distrust every number that stands in for the thing you actually care about: applications are a proxy for recruits, posts published are a proxy for pipeline, units sold are a proxy for units that survive ninety days.</p>
+  <div class="done-when"><b>Done when</b>You review it every Friday and can name this week's binding constraint in one sentence.</div>
+  <label class="chk"><input type="checkbox"> Mark complete</label>
+</div>
+
+<div class="step">
+  <div class="sh"><span class="sn">B3</span><p class="st">Publish one commission schedule and hold to it</p></div>
+  <ul>
+    <li>One schedule. One override level, corporate to cell. No discretionary haircut, ever.</li>
+    <li>Holdback rules and chargeback terms visible <b>before</b> anyone signs.</li>
+    <li>The ledger is the statement. No paper commission statements.</li>
+  </ul>
+  <div class="done-when"><b>Done when</b>A rep can read the schedule, predict their own payout, and be right.</div>
+  <label class="chk"><input type="checkbox"> Mark complete</label>
+</div>
+
+<div class="step">
+  <div class="sh"><span class="sn">B4</span><p class="st">Size the reserve for the cell count you will have in twelve months</p></div>
+  <ul>
+    <li>Track three separate numbers, never one: <b>units written</b>, <b>units installed</b>, <b>units surviving day 90</b>. Only the third one is real revenue.</li>
+    <li>Holdback and chargeback timing is the failure mode that arrives exactly when cell count outruns reserve policy.</li>
+    <li>Surplus is not the reward, it is a responsibility with a job to do. Here that job is reserve and reinvestment.</li>
+  </ul>
+  <p style="margin-top:12px">Knowing your own numbers honestly was a competitive advantage in 1870 and it still is - most D2D operators genuinely do not know their chargeback rate.</p>
+  <div class="done-when"><b>Done when</b>You can state your chargeback rate and your day-90 survival rate from memory, and the reserve is set against next year's headcount.</div>
+  <label class="chk"><input type="checkbox"> Mark complete</label>
+</div>
+
+<div class="step">
+  <div class="sh"><span class="sn">B5</span><p class="st">Write the back office down end to end</p></div>
+  <ul>
+    <li>Licensing, payouts, compliance, mapping, recruiting funnel, training, onboarding path.</li>
+    <li>Written so a stranger could run a cell from it without calling you.</li>
+    <li>Build it while you are the only user. It becomes the product you license later - this is literally what an operator pays override for.</li>
+  </ul>
+  <div class="done-when"><b>Done when</b>Someone who has never met you runs a full week off the document and does not phone you once.</div>
+  <label class="chk"><input type="checkbox"> Mark complete</label>
+</div>
+
+<div class="step">
+  <div class="sh"><span class="sn">B6</span><p class="st">Open the referral program</p></div>
+  <ul>
+    <li>Paid on <b>installed and surviving</b> accounts only. Never on a signature.</li>
+    <li>Sources in order: past customers first, then property managers, HOA contacts, and the trades already inside the home.</li>
+    <li>Your referral network is not something you go find - it is sitting in your install list right now. Phase 1 and this step are the same list, worked twice.</li>
+  </ul>
+  <p style="margin-top:12px">A referred sale and a knocked sale carry the same revenue at very different cost. The margin gap understates it: a referral does not consume a rep-day, which is the actual scarce resource, and it closes faster and cancels less.</p>
+  <div class="done-when"><b>Done when</b>A measurable share of monthly sales arrives without consuming a rep-day, and you can name that share.</div>
+  <label class="chk"><input type="checkbox"> Mark complete</label>
+</div>
+
+<div class="step">
+  <div class="sh"><span class="sn">B7</span><p class="st">Add products by qualifying, not by deciding</p></div>
+  <p style="margin:8px 0 0">Frontier stays the only meaningful line until the playbook exists. Focus is saying no.</p>
+  <div class="tw"><table>
+    <tr><th>Phase</th><th>Add</th><th>Qualifies when</th></tr>
+    <tr><td>0</td><td>Frontier + EarthLink + ADT sub-dealer</td><td>Held today</td></tr>
+    <tr><td>1</td><td>Frontier, deepened - one carrier only</td><td>Gates 1-2</td></tr>
+    <tr><td>2</td><td>AT&T Fiber - the volume engine</td><td>Consistent multi-cell production, clean compliance record</td></tr>
+    <tr><td>3</td><td>Brightspeed - the growth play</td><td>Gate 3, second state licensed</td></tr>
+    <tr><td>4</td><td><b>ADT direct</b> - your own paper</td><td>Licensing in 3+ states, working capital in place</td></tr>
+    <tr><td>5</td><td>Puronics water - runs on the Phase 4 spine</td><td>Install and financing capability proven</td></tr>
+    <tr><td>6</td><td>Optimum - the leverage play</td><td>Gate 4, back office carries a fourth ISP</td></tr>
+    <tr><td>7</td><td>Vivint - only if the ADT conflict resolves</td><td>Gate 4-5 and a resolved exclusivity position</td></tr>
+  </table></div>
+  <p><b>ADT moved up on purpose.</b> Fiber commission is transactional; monitoring generates recurring revenue, and recurring revenue is what an acquirer buys. Security is the asset, fiber is the engine feeding it.</p>
+  <p><b>The structural answer to every carrier conflict:</b> hold the portfolio nationally, sell one or two products locally. A cell sells whichever carrier owns the fiber under those addresses plus one security line - never all eight. Confirm exclusivity language (ADT vs Vivint, AT&T vs Frontier in CA and TX) before spending time on either.</p>
+  <div class="done-when"><b>Done when</b>You have never added a carrier before the gate was passed, and every cell sells at most two carriers plus one security line.</div>
+  <label class="chk"><input type="checkbox"> Mark complete</label>
+</div>
+
+<div class="step">
+  <div class="sh"><span class="sn">B8</span><p class="st">Convert commission income into an owned asset</p></div>
+  <ul>
+    <li><b>Now:</b> ADT monitoring RMR. It does not disappear when a fiber dealer agreement changes.</li>
+    <li><b>Then:</b> the water filter replacement cycle, which compounds on every installed system every 12-18 months.</li>
+    <li><b>Eventually:</b> passings you own. Coverage is no longer the industry's constraint - penetration is. The scarce asset in fiber right now is a functioning ground game, and that is precisely what you are building.</li>
+    <li>Entry order if you ever go there: retail ISP on an open-access network first, then MDU builds, then acquiring a stalled network or greenfield. Skipping to greenfield is how people lose everything they built in the first nine years.</li>
+  </ul>
+  <p style="margin-top:12px">The pattern is two centuries old. Astor did not get rich by being better at fur - he used the fur trade to buy the appreciating asset underneath the city.</p>
+  <div class="done-when"><b>Done when</b>A meaningful and growing share of monthly revenue arrives whether or not anyone knocked that month.</div>
+  <label class="chk"><input type="checkbox"> Mark complete</label>
+</div>
+
+<div class="step">
+  <div class="sh"><span class="sn">B9</span><p class="st">Keep the compliance surface off the chopping block</p></div>
+  <ul>
+    <li>Licensing, cooling-off rights, worker classification and earnings-claim rules are <b>not</b> dumb requirements to be deleted. Run the algorithm on processes, never on compliance.</li>
+    <li>1099 posture: you cannot demand hours. Intensity is modeled, never required. Every control signal compounds across the network.</li>
+    <li>Security: CA ACO #6446, ACE #552544, plus individual agent registration. Thirty-seven states license alarm work, and requirements vary sharply by state.</li>
+    <li>Water, when it comes: three-day cooling-off, contract-language rules for sales negotiated in Spanish and several other languages, CSLB classification for installs, device certification, financing regulations, senior protections, and health claims - say only what the certification says.</li>
+    <li>Before Gate 3, retain counsel on franchise and business-opportunity law. A licensed operator network with a fee, a marketing plan and a shared brand can meet the legal definition of a franchise.</li>
+  </ul>
+  <div class="done-when"><b>Done when</b>You have a named person and a calendar date for every licence renewal and every dealer marketing rule.</div>
+  <label class="chk"><input type="checkbox"> Mark complete</label>
+</div>
+
+<div class="panel warn">
+  <h4>Three ways this dies - watch these, not the top line</h4>
+  <ul>
+    <li><b>Holdback and chargeback timing</b> at the moment cell count outruns reserve policy.</li>
+    <li><b>Carrier concentration</b> while Frontier is your only meaningful line under new ownership. Treat terms as unsettled.</li>
+    <li><b>Override revenue that starts depending on new cells opening</b> rather than existing cells producing. If that inverts you will not see it in the top line - watch per-cell production.</li>
+  </ul>
+</div>
+</section>
+
+<hr class="hr">
+
+<!-- ============ 03 OFFICE GROWTH ============ -->
+<section id="office" style="--ac:#5ad3a4">
+<div class="banner">
+  <div class="num">Section 03</div>
+  <h2>Office Growth</h2>
+  <p>How one cell becomes many without becoming the thing you are trying to replace.</p>
+</div>
+
+<p>Nobody reaches a large office count by opening them one at a time with their own capital. Company-owned tops out around 10-25 offices before the org chart eats you. The licensed owner-operator network is the only shape that scales - and the shape is not the problem.</p>
+
+<div class="panel rule">
+  <h4>What actually makes a network predatory - only three things</h4>
+  <ul>
+    <li>An operator who earns more from recruiting than from selling.</li>
+    <li>A promotion ladder that requires a downline to advance.</li>
+    <li>An entry fee.</li>
+  </ul>
+  <p style="margin:10px 0 0">Remove those three and you have a distribution network. Keep any one and you have rebuilt the thing you set out to replace.</p>
+</div>
+
+<div class="step">
+  <div class="sh"><span class="sn">O1</span><p class="st">Define the unit before you count anything</p></div>
+  <div class="tw"><table>
+    <tr><th>Component</th><th>Standard</th></tr>
+    <tr><td><b>Operator</b></td><td>One accountable owner. Not a title, not a promotion - a person with their own entity and their own downside.</td></tr>
+    <tr><td><b>Roster</b></td><td>8 to 15 active reps.</td></tr>
+    <tr><td><b>Territory</b></td><td>A serviceability-defined cell, not a city. Drawn from carrier footprint data, not a map of where people live.</td></tr>
+    <tr><td><b>Space</b></td><td>Optional. Most cells need a meeting spot, not a lease.</td></tr>
+    <tr><td><b>Products</b></td><td>At minimum two carriers plus security, so one dealer change cannot kill the cell.</td></tr>
+    <tr><td><b>Systems</b></td><td>Your tooling, mandatory. This is what you are actually licensing.</td></tr>
+  </table></div>
+  <div class="done-when"><b>Done when</b>The definition is written into the operator agreement, not just understood.</div>
+  <label class="chk"><input type="checkbox"> Mark complete</label>
+</div>
+
+<div class="step">
+  <div class="sh"><span class="sn">O2</span><p class="st">Gate 1 - prove one cell</p></div>
+  <ul>
+    <li>Profitable three consecutive months.</li>
+    <li>A playbook a stranger could follow, which is step B5.</li>
+    <li>Do not open a second cell before both are true. This is the gate people skip and the reason most networks stall at three.</li>
+  </ul>
+  <div class="done-when"><b>Done when</b>Three straight profitable months on paper, plus the written playbook.</div>
+  <label class="chk"><input type="checkbox"> Mark complete</label>
+</div>
+
+<div class="step">
+  <div class="sh"><span class="sn">O3</span><p class="st">Build the operator offer and test it against reality</p></div>
+  <p style="margin:8px 0 0">Realistic office economics - and read the warning under the table before you use any of it.</p>
+  <div class="tw"><table>
+    <tr><th>Tier</th><th>Assumptions</th><th>Paid units/mo</th><th>Office gross/mo</th></tr>
+    <tr><td><b>Capacity</b></td><td>10 reps all producing, 21.7 days, no loss</td><td>434</td><td>$195,300</td></tr>
+    <tr><td><b>Realistic</b></td><td>6.5 producing, 18 days, 80% install, 90% survival</td><td>168</td><td>$75,700</td></tr>
+    <tr><td><b>Conservative</b></td><td>6 producing, 16 days, 1.5/day, 75% install, 88% survival</td><td>95</td><td>$42,800</td></tr>
+  </table></div>
+  <p><b>The operator test:</b> at the realistic tier, after rep commissions, an 8 percent override and office opex, an operator clears somewhere around twenty-odd thousand a month before their own taxes and time. That number decides whether you can recruit operators at all - it has to beat what a strong closer makes selling for someone else. If the split does not clear that bar, fix the split before you open markets.</p>
+  <p><b>Never show any of this to a rep or a recruit.</b> Two sales per rep per day sustained across an entire roster is top-decile, not an average. Capacity is a ceiling for sizing territory and install capacity - not for planning cash.</p>
+  <div class="done-when"><b>Done when</b>You have run your own numbers and the operator split beats the alternative a good closer already has.</div>
+  <label class="chk"><input type="checkbox"> Mark complete</label>
+</div>
+
+<div class="step">
+  <div class="sh"><span class="sn">O4</span><p class="st">Gate 2 - prove the clone</p></div>
+  <ul>
+    <li>Three to five cells operating.</li>
+    <li><b>Two operator-run cells hit your day-90 survival rate without your daily involvement.</b> That is the actual test - not revenue, survival.</li>
+    <li>If they only work when you are in them, you have one cell and two branches.</li>
+  </ul>
+  <div class="done-when"><b>Done when</b>Two cells you did not work in matched your survival number for a full quarter.</div>
+  <label class="chk"><input type="checkbox"> Mark complete</label>
+</div>
+
+<div class="step">
+  <div class="sh"><span class="sn">O5</span><p class="st">Draw territory from serviceability, never from geography</p></div>
+  <ul>
+    <li>A serviceability list is a different object from a lead list. Build non-pen lists from carrier footprint data.</li>
+    <li>Cycle time to watch: territory decision to first rep on the street.</li>
+    <li>A rep in a Brightspeed cell never knocks a Frontier address, so a carrier conflict never reaches the street.</li>
+  </ul>
+  <div class="done-when"><b>Done when</b>Every open cell has a mapped, penetrated-vs-open address list before its first knock.</div>
+  <label class="chk"><input type="checkbox"> Mark complete</label>
+</div>
+
+<div class="step">
+  <div class="sh"><span class="sn">O6</span><p class="st">Write the eight anti-pyramid rules into the operator agreement</p></div>
+  <p style="margin:8px 0 0">Terms in a contract, not values on a wall.</p>
+  <div class="tw"><table>
+    <tr><th>Rule</th><th>Why</th></tr>
+    <tr><td><b>No entry fee, ever</b></td><td>The moment an operator pays to open, your incentive shifts from their success to their signature. This one rule kills most failure modes.</td></tr>
+    <tr><td><b>Override on production only</b></td><td>Corporate earns on installed, surviving units. Never on headcount or recruit count.</td></tr>
+    <tr><td><b>No downline requirement to advance</b></td><td>An operator becomes one by producing and running a clean cell.</td></tr>
+    <tr><td><b>One level of override</b></td><td>Corporate to cell. Depth is what turns distribution into a pyramid.</td></tr>
+    <tr><td><b>Published economics</b></td><td>Full schedule, holdback rules and chargeback terms visible before signing.</td></tr>
+    <tr><td><b>Operators cannot sell territory</b></td><td>Assigned on performance, returned on failure. Not an asset to flip to a recruit.</td></tr>
+    <tr><td><b>No income claims anywhere</b></td><td>The Channel B rule applies to every cell, in writing, with a takedown process.</td></tr>
+    <tr><td><b>Exit is clean</b></td><td>Defined termination terms and residual treatment. Networks turn ugly when leaving is punitive.</td></tr>
+  </table></div>
+  <div class="done-when"><b>Done when</b>All eight appear as numbered clauses in the signed agreement.</div>
+  <label class="chk"><input type="checkbox"> Mark complete</label>
+</div>
+
+<div class="step">
+  <div class="sh"><span class="sn">O7</span><p class="st">Gates 3, 4 and 5 - and the stop rule</p></div>
+  <div class="tw"><table>
+    <tr><th>Gate</th><th>Scale</th><th>Pass criterion</th></tr>
+    <tr><td><b>3 - Region</b></td><td>15-25 cells</td><td>A second state fully licensed and producing; override alone covers corporate overhead.</td></tr>
+    <tr><td><b>4 - Platform</b></td><td>50-80 cells</td><td>Operator pipeline self-sustaining - sourced by existing operators and inbound, not by you.</td></tr>
+    <tr><td><b>5 - Scale</b></td><td>200 cells</td><td>Cell-level survival and compliance hold flat as count doubles.</td></tr>
+  </table></div>
+  <p><b>The stop rule: if quality degrades, stop adding.</b> The pressure at Gate 4 is to approve operators you would have rejected at Gate 2. That is precisely how good networks become bad ones.</p>
+  <div class="done-when"><b>Done when</b>You have declined at least one operator you could have taken, because they did not clear the Gate 2 bar.</div>
+  <label class="chk"><input type="checkbox"> Mark complete</label>
+</div>
+
+<div class="panel warn">
+  <h4>What actually caps the count</h4>
+  <ul>
+    <li><b>Licensing surface.</b> One unlicensed sale in the wrong state is a regulatory action against the parent, not the cell.</li>
+    <li><b>Growing past compliance capacity.</b> Compliance headcount has to lead cell count, not follow it.</li>
+    <li><b>Operator quality collapse</b> at Gate 4.</li>
+    <li><b>Recruiting-funded growth.</b> If override depends on new cells opening rather than existing cells producing, the model has inverted.</li>
+    <li><b>Classification exposure at scale.</b> Two thousand contractors is a much bigger target than twenty.</li>
+  </ul>
+</div>
+</section>
+
+<hr class="hr">
+
+<!-- ============ 04 RECRUITING ============ -->
+<section id="recruiting" style="--ac:#bda3ff">
+<div class="banner">
+  <div class="num">Section 04</div>
+  <h2>Recruiting</h2>
+  <p>At scale, recruiting infrastructure is not a marketing project. It is the product.</p>
+</div>
+
+<p>Do this math once and the rest of the section explains itself. A network of 200 cells at 10 reps each, at typical D2D attrition, needs roughly <b>28 onboarded reps every week, forever, just to stand still</b>. That is a production line, not a hiring process.</p>
+
+<div class="calc">
+  <h4>Your replacement math</h4>
+  <p class="sub">Enter what is true today. This tells you whether you are growing, flat, or shrinking while sales look fine.</p>
+  <div class="fields">
+    <div class="f"><label>Active reps</label><input type="number" id="i_reps" value="12" min="0" step="1"></div>
+    <div class="f"><label>Annual attrition %</label><input type="number" id="i_attr" value="70" min="0" max="100" step="1"></div>
+    <div class="f"><label>Ride-alongs / month</label><input type="number" id="i_ride" value="8" min="0" step="1"></div>
+    <div class="f"><label>Ride-along to onboard %</label><input type="number" id="i_conv" value="45" min="0" max="100" step="1"></div>
+    <div class="f"><label>Target rep count</label><input type="number" id="i_targ" value="20" min="0" step="1"></div>
+  </div>
+  <div class="outs">
+    <div class="o"><span>Replace / month</span><b id="o_repl">-</b></div>
+    <div class="o"><span>Onboards / month</span><b id="o_onb">-</b></div>
+    <div class="o" id="box_cov"><span>Coverage ratio</span><b id="o_cov">-</b></div>
+    <div class="o"><span>Net reps / month</span><b id="o_net">-</b></div>
+    <div class="o"><span>Months to target</span><b id="o_mth">-</b></div>
+  </div>
+  <div class="verdict" id="verdict">Enter your numbers above.</div>
+  <p style="margin:12px 0 0;font-size:14.5px;color:var(--dim)">Coverage ratio is onboards divided by the replacements you need to stay flat. Below 2x you are shrinking even if sales look fine. Planning arithmetic only - none of these figures belong in recruiting material.</p>
+</div>
+
+<div class="step">
+  <div class="sh"><span class="sn">R1</span><p class="st">Go always-on. Never blitz.</p></div>
+  <ul>
+    <li>Post weekly and book ride-alongs weekly whether or not you need bodies.</li>
+    <li>A blitz fills a class, then leaves you with nothing three weeks later when half of them quit.</li>
+    <li>A pipeline built during an emergency is already too late. Consistency is the whole mechanism.</li>
+  </ul>
+  <div class="done-when"><b>Done when</b>You have run twelve straight weeks of recruiting activity, including the weeks you were full.</div>
+  <label class="chk"><input type="checkbox"> Mark complete</label>
+</div>
+
+<div class="step">
+  <div class="sh"><span class="sn">R2</span><p class="st">Delete the interview and the screening call</p></div>
+  <ul>
+    <li>The DM sequence screens better, and asynchronously.</li>
+    <li><b>The ride-along is the conversion event.</b> Half a day shadowing a rep tests the actual job, and filters harder than any interview ever did.</li>
+    <li>No commitment either side. That framing is what makes people show up.</li>
+  </ul>
+  <div class="done-when"><b>Done when</b>Nobody has been interviewed in a month and your onboard quality did not drop.</div>
+  <label class="chk"><input type="checkbox"> Mark complete</label>
+</div>
+
+<div class="step">
+  <div class="sh"><span class="sn">R3</span><p class="st">Tell them what it is, before they spend time on it</p></div>
+  <ul>
+    <li>1099 independent contractor. Commission only. You set your own schedule. No hourly floor, no ceiling.</li>
+    <li>"Plenty of people find it is not for them." Say that out loud, early.</li>
+    <li>The research reason this works: necessity-driven self-employment satisfies far less than opportunity-driven. Honesty filters out your week-two attrition <b>before</b> it costs you a training slot.</li>
+    <li>No urgency, no scarcity, no limited spots. Pressure recruits the desperate, and the desperate quit.</li>
+  </ul>
+  <div class="done-when"><b>Done when</b>The expectations message is a fixed step in the DM sequence, sent before the application link every time.</div>
+  <label class="chk"><input type="checkbox"> Mark complete</label>
+</div>
+
+<div class="step">
+  <div class="sh"><span class="sn">R4</span><p class="st">Onboard on real doors, in three days</p></div>
+  <ul>
+    <li>Replace the week-long class with three days of doors alongside someone good.</li>
+    <li>One onboarding path, written so a stranger could run it.</li>
+    <li>The person who trains them is the person who knocks with them. That is pillar 3 and it is also just the fastest way to train.</li>
+    <li>Core cycle time to measure: <b>comment to first knock</b>. That number governs how fast the whole network can grow.</li>
+  </ul>
+  <div class="done-when"><b>Done when</b>Comment to first knock is measured in days, not weeks, and you know the number.</div>
+  <label class="chk"><input type="checkbox"> Mark complete</label>
+</div>
+
+<div class="step">
+  <div class="sh"><span class="sn">R5</span><p class="st">Plan for week two, because that is where they go</p></div>
+  <ul>
+    <li>Week two is the kill zone. Treat it as a designed part of the process, not a surprise.</li>
+    <li>Build the week-two touchpoint: a named person, a ride-along, a specific conversation about the slow days.</li>
+    <li>Your first reel hook is literally "why do most new reps quit in week two" - answer it internally before you answer it publicly.</li>
+    <li>Compare two anonymized 90-day activity curves and find what the survivor did differently in days 8-14.</li>
+  </ul>
+  <div class="done-when"><b>Done when</b>Day-90 survival improves against your own baseline, and you can name the change that moved it.</div>
+  <label class="chk"><input type="checkbox"> Mark complete</label>
+</div>
+
+<div class="step">
+  <div class="sh"><span class="sn">R6</span><p class="st">Pay in recognition, and run the quarterly field day</p></div>
+  <ul>
+    <li>Repost the two best rep posts every Thursday, named. For most of the roster, recognition is the pay.</li>
+    <li>Quarterly field day: half training, half recognition, filmed end to end. It solves retention and recruiting in one afternoon and produces a quarter of content.</li>
+    <li>It is training and recognition - not a ticketed product. The moment you sell a course about door-to-door you have changed businesses and taken on the entire earnings-claim regime.</li>
+  </ul>
+  <div class="done-when"><b>Done when</b>The first field day has happened and the footage is cut into the reel series.</div>
+  <label class="chk"><input type="checkbox"> Mark complete</label>
+</div>
+
+<div class="step">
+  <div class="sh"><span class="sn">R7</span><p class="st">Recruit through your reps, not around them</p></div>
+  <ul>
+    <li>Your best recruiting creators are already on your roster. Do not go looking for D2D influencers.</li>
+    <li>Whitelist recruiting ads from the rep's own handle, with written permission. Perceived first-hand experience converts better than the same message from the brand page.</li>
+    <li>Pay a bonus when someone they sourced completes a ride-along and onboards - outcome, not effort.</li>
+    <li>Second tier if you need more: local micro-creators in adjacent work - trades, delivery, gig driving.</li>
+  </ul>
+  <div class="done-when"><b>Done when</b>More than half of new onboards trace back to a rep, not to you.</div>
+  <label class="chk"><input type="checkbox"> Mark complete</label>
+</div>
+
+<div class="step">
+  <div class="sh"><span class="sn">R8</span><p class="st">Track the two real numbers, ignore the rest</p></div>
+  <ul>
+    <li><b>Ride-alongs booked per month.</b> Applications are vanity - people apply to everything.</li>
+    <li><b>Day-90 survival.</b> Not units sold, not headcount.</li>
+    <li>Coverage ratio below 2x means you are shrinking. Fix that before you fix anything else on the scoreboard.</li>
+  </ul>
+  <div class="done-when"><b>Done when</b>Both numbers appear on the Friday scoreboard and nothing else about recruiting does.</div>
+  <label class="chk"><input type="checkbox"> Mark complete</label>
+</div>
+
+<div class="panel warn">
+  <h4>Recruiting guardrails</h4>
+  <ul>
+    <li><b>No entry fee, no kit purchase.</b> Company-owned equipment, issued and returned. An entry fee wearing a costume is still an entry fee.</li>
+    <li><b>No income claims</b> - not from you, not from a rep, not from an operator, not in a DM.</li>
+    <li><b>Never require posting</b> or demand hours. Both are control signals against the 1099 classification.</li>
+    <li><b>Advancement never comes from recruiting.</b> Promotion for bringing in an associate is the clearest marker of a pyramid-shaped incentive.</li>
+    <li><b>Reps may post</b> the day, the route, a pitch, a bad door, why they took the work, team moments, their honest complaints. <b>They may not post</b> any dollar figure, check, statement or app screenshot, any range or "six figures", any promise about what someone else could earn, unblurred customer data, or unapproved carrier offers.</li>
+    <li><b>Run a takedown path.</b> Someone checks tagged content weekly. A number goes up, you ask the same day, and you keep the record that you did.</li>
+  </ul>
+</div>
+</section>
+
+<hr class="hr">
+
+<!-- ============ 05 PLAN ============ -->
+<section id="plan" style="--ac:#ff7b86">
+<div class="banner">
+  <div class="num">Section 05</div>
+  <h2>The Plan</h2>
+  <p>All four sections, sequenced. Each phase assumes the one before it is boring.</p>
+</div>
+
+<div class="tl">
+  <div class="tli">
+    <div class="when">Days 1-30 / Foundation</div>
+    <div class="what">Start calling, stop guessing</div>
+    <ul>
+      <li>M1 - four pillars written into every existing piece of copy.</li>
+      <li>M2 - begin the day-7 call on every install. Daily, by hand.</li>
+      <li>B1 - name an owner for every rule; publish the delete list.</li>
+      <li>B2 - stand up the six-number scoreboard and review it Friday.</li>
+      <li>B3 - publish one commission schedule with holdback rules visible.</li>
+      <li>R1 - book ride-alongs weekly whether or not you need bodies.</li>
+    </ul>
+    <div class="proof"><b>Proof</b>You can name this week's binding constraint, and you have called every install personally.</div>
+  </div>
+
+  <div class="tli">
+    <div class="when">Days 31-90 / Voice and format</div>
+    <div class="what">Turn what customers said into content</div>
+    <ul>
+      <li>M3 - objection list becomes rebuttals and reel scripts.</li>
+      <li>M5 and M6 - lock the banner, publish hooks 1 through 12, one a week.</li>
+      <li>M7 - comment-to-application funnel live, five touches, hard stop.</li>
+      <li>M4 - now automate day 7 and day 90 SMS. Track cancellation before and after.</li>
+      <li>R2, R3, R4 - delete the interview, front-load expectations, onboard on real doors in three days.</li>
+      <li>B6 - referral program opens, paid on installed and surviving accounts only.</li>
+    </ul>
+    <div class="proof"><b>Proof</b>Cancellation rate is visibly down and the first referred install has landed.</div>
+  </div>
+
+  <div class="tli">
+    <div class="when">Months 4-8 / Write it down</div>
+    <div class="what">Build the thing an operator will pay override for</div>
+    <ul>
+      <li>M8 - Creator Corps launches: content addendum signed, Monday prompt, Thursday repost, Friday whitelist and kill.</li>
+      <li>B5 - back office documented end to end.</li>
+      <li>R5 and R6 - week-two intervention designed; first field day at month 6, then quarterly.</li>
+      <li>M9 - credibility layer starts. Press, reviews, real site. Slow and compounding.</li>
+      <li>O1 - the cell definition written into the operator agreement, with the eight rules (O6).</li>
+    </ul>
+    <div class="proof"><b>Proof</b>A stranger could run the cell from the written playbook.</div>
+  </div>
+
+  <div class="tli">
+    <div class="when">Months 6-9 / Gate 1</div>
+    <div class="what">Prove one cell</div>
+    <ul>
+      <li>Three consecutive profitable months.</li>
+      <li>O3 - operator economics modelled and the split tested against what a strong closer earns elsewhere.</li>
+      <li>M9 - Channel A episode 1, with the standing disclosure and a lawyer's read on the firewall.</li>
+      <li>B4 - reserve sized against next year's headcount, not this year's.</li>
+    </ul>
+    <div class="proof"><b>Proof</b>Gate 1 passed: profitable three months running, playbook written.</div>
+  </div>
+
+  <div class="tli">
+    <div class="when">Months 9-15 / Gate 2</div>
+    <div class="what">Prove the clone</div>
+    <ul>
+      <li>O4 - two operator-run cells hit your day-90 survival rate without your daily involvement.</li>
+      <li>R7 - recruiting flows through reps and operators, not through you.</li>
+      <li>O5 - every new cell mapped from serviceability before its first knock.</li>
+      <li>Watch per-cell production, not total production. That is where the inversion shows up first.</li>
+    </ul>
+    <div class="proof"><b>Proof</b>Cells profitable without your daily involvement.</div>
+  </div>
+
+  <div class="tli">
+    <div class="when">Months 15-24 / Gate 3</div>
+    <div class="what">Prove the region</div>
+    <ul>
+      <li>Second state fully licensed and producing.</li>
+      <li>B7 Phase 2 - AT&T Fiber added, on qualification not decision.</li>
+      <li>B7 Phase 4 - ADT converted to your own paper. Security is the asset.</li>
+      <li>Counsel retained on franchise and business-opportunity law before this gate, not after.</li>
+    </ul>
+    <div class="proof"><b>Proof</b>Override alone covers corporate overhead.</div>
+  </div>
+
+  <div class="tli">
+    <div class="when">Months 24-36 / Second recurring line</div>
+    <div class="what">Stop being a one-line transactional business</div>
+    <ul>
+      <li>B7 Phase 3 - Brightspeed, on the growth footprint.</li>
+      <li>B7 Phase 5 - Puronics water, running on the ADT operational spine: licence, install crew, consumer financing, in-home close, cooling-off compliance. Build the spine once, run both on it.</li>
+      <li>Water is a second offer on a door you already knocked, never a separate business.</li>
+      <li>B8 - RMR and the filter replacement cycle now form a real share of revenue.</li>
+    </ul>
+    <div class="proof"><b>Proof</b>Two recurring lines, not one transactional one.</div>
+  </div>
+
+  <div class="tli">
+    <div class="when">Years 3-7 / Gates 4 and 5</div>
+    <div class="what">Platform, then scale</div>
+    <ul>
+      <li>Gate 4 at 50-80 cells: operator pipeline self-sustaining, sourced by existing operators and inbound.</li>
+      <li>Gate 5 at 200: survival and compliance hold flat as count doubles.</li>
+      <li>The stop rule stays armed the whole way. If quality degrades, stop adding.</li>
+    </ul>
+    <div class="proof"><b>Proof</b>Quality holds flat as cell count doubles.</div>
+  </div>
+
+  <div class="tli">
+    <div class="when">Years 5-10 / The destination</div>
+    <div class="what">Own the network instead of selling it</div>
+    <ul>
+      <li>The scarce asset in fiber is not coverage, it is penetration - and the machine that moves penetration is exactly what you spent nine years building.</li>
+      <li>Entry order: retail ISP on an open-access network, then MDU builds, then a distressed acquisition or greenfield. Never skip to greenfield.</li>
+      <li>Know what your dealer agreements say about competing activity before you take a single step.</li>
+      <li>RMR and the water line are the revenue that does not evaporate when a dealer agreement ends.</li>
+    </ul>
+    <div class="proof"><b>Proof</b>You sell your own passings, not someone else's.</div>
+  </div>
+</div>
+
+<div class="kicker">The week, once all of it is running</div>
+<div class="tw"><table>
+  <tr><th>Rhythm</th><th>Action</th></tr>
+  <tr><td><b>Daily</b></td><td>Call one install by hand.</td></tr>
+  <tr><td><b>Monday</b></td><td>Content prompt to the rep channel.</td></tr>
+  <tr><td><b>Tuesday</b></td><td>Publish the episode. First ten comments by hand.</td></tr>
+  <tr><td><b>Thursday</b></td><td>Repost the two best rep posts, named.</td></tr>
+  <tr><td><b>Friday</b></td><td>Kill the loser, whitelist the winner, review the scoreboard.</td></tr>
+  <tr><td><b>Weekly</b></td><td>Delete one process. Record whether you added it back.</td></tr>
+  <tr><td><b>Monthly</b></td><td>Channel A number published. Compliance sweep on tagged content.</td></tr>
+  <tr><td><b>Quarterly</b></td><td>Field day. Run the full algorithm on one system.</td></tr>
+</table></div>
+
+<div class="panel rule">
+  <h4>Four rules that decide whether this works</h4>
+  <ul>
+    <li><b>Start at the customer and work backwards.</b> Call every install at day 7 and ask why they said yes.</li>
+    <li><b>Subtract before you add.</b> Delete one process a week and record whether you had to add it back.</li>
+    <li><b>Distrust the number that stands in for the thing.</b> Ride-alongs, not applications. Units surviving day 90, not units sold.</li>
+    <li><b>Consistency beats intensity.</b> Always-on recruiting. Weekly episode whether or not you need bodies.</li>
+  </ul>
+  <p style="margin:10px 0 0">Note what is absent from all four: none of it is about motivation, intensity or mindset. It is about books, customers, assets and reserves.</p>
+</div>
+</section>
+
+<footer>
+Complete Home Today LLC / Growth Playbook v1.0 / darrell@completehomellc.com / CA ACO #6446 / CA ACE #552544<br>
+Implementation guide derived from Full Strategy v2.0. Planning document - not legal, tax or financial advice. Verify every regulatory item with counsel before acting. No figure in this document may appear in recruiting material.
+</footer>
+
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  // ---- checklist progress (in-memory only) ----
+  var boxes = Array.prototype.slice.call(document.querySelectorAll(".chk input"));
+  var fill = document.getElementById("fill");
+  var cnt = document.getElementById("cnt");
+
+  function refresh(){
+    var done = 0;
+    boxes.forEach(function(b){
+      var step = b.closest(".step");
+      if (b.checked){ done++; if (step) step.classList.add("done"); }
+      else if (step){ step.classList.remove("done"); }
+    });
+    cnt.textContent = done + " / " + boxes.length;
+    fill.style.width = (boxes.length ? (done / boxes.length) * 100 : 0) + "%";
+  }
+  boxes.forEach(function(b){ b.addEventListener("change", refresh); });
+  refresh();
+
+  var resetBtn = document.getElementById("resetBtn");
+  if (resetBtn){
+    resetBtn.addEventListener("click", function(){
+      boxes.forEach(function(b){ b.checked = false; });
+      refresh();
+    });
+  }
+  var printBtn = document.getElementById("printBtn");
+  if (printBtn){ printBtn.addEventListener("click", function(){ window.print(); }); }
+
+  // ---- recruiting calculator ----
+  function val(id){
+    var el = document.getElementById(id);
+    var n = parseFloat(el && el.value);
+    return isFinite(n) && n >= 0 ? n : 0;
+  }
+  function calc(){
+    var reps = val("i_reps");
+    var attr = val("i_attr") / 100;
+    var ride = val("i_ride");
+    var conv = val("i_conv") / 100;
+    var targ = val("i_targ");
+
+    var replace = reps * attr / 12;
+    var onboard = ride * conv;
+    var net = onboard - replace;
+    var cov = replace > 0 ? onboard / replace : (onboard > 0 ? Infinity : 0);
+
+    document.getElementById("o_repl").textContent = replace.toFixed(1);
+    document.getElementById("o_onb").textContent = onboard.toFixed(1);
+    document.getElementById("o_cov").textContent = (cov === Infinity ? "inf" : cov.toFixed(1) + "x");
+    document.getElementById("o_net").textContent = (net >= 0 ? "+" : "") + net.toFixed(1);
+
+    var months = "-";
+    if (targ > reps){ months = net > 0 ? Math.ceil((targ - reps) / net) : "never"; }
+    else { months = "at target"; }
+    document.getElementById("o_mth").textContent = months;
+
+    var box = document.getElementById("box_cov");
+    box.classList.remove("good", "bad");
+    var v = document.getElementById("verdict");
+    if (cov < 1){
+      box.classList.add("bad");
+      v.innerHTML = "<b>You are shrinking.</b> Onboards do not cover replacements. Sales can look fine for another two months and then fall off a cliff. Recruiting is your binding constraint - work nothing else until coverage clears 2x.";
+    } else if (cov < 2){
+      box.classList.add("bad");
+      v.innerHTML = "<b>Flat at best.</b> Below 2x there is no margin for a bad month. Raise ride-alongs booked before you raise anything else.";
+    } else if (cov < 3){
+      box.classList.add("good");
+      v.innerHTML = "<b>Growing slowly.</b> Coverage is holding. Now push day-90 survival - lifting survival lowers the replacement number and improves this ratio without a single extra ride-along.";
+    } else {
+      box.classList.add("good");
+      v.innerHTML = "<b>Growing.</b> Recruiting is not your constraint right now. Check the other five numbers on the scoreboard and find what is - it is probably install capacity or survival.";
+    }
+  }
+  ["i_reps","i_attr","i_ride","i_conv","i_targ"].forEach(function(id){
+    var el = document.getElementById(id);
+    if (el){ el.addEventListener("input", calc); }
+  });
+  calc();
+
+  // ---- nav highlight ----
+  var links = Array.prototype.slice.call(document.querySelectorAll("nav a"));
+  var secs = links.map(function(a){ return document.getElementById(a.getAttribute("href").slice(1)); });
+  function spy(){
+    var y = window.scrollY + 140, idx = 0;
+    secs.forEach(function(s, i){ if (s && s.offsetTop <= y){ idx = i; } });
+    links.forEach(function(a, i){ a.classList.toggle("on", i === idx); });
+  }
+  window.addEventListener("scroll", spy, { passive: true });
+  spy();
+})();
+</script>
+</body>
+</html>
