@@ -72,6 +72,37 @@ em{color:#fff;font-style:italic}
 .panel ul{margin:8px 0 0;padding-left:20px}
 .panel li{margin:5px 0}
 
+/* ---- collapsible ---- */
+.chev{display:block;width:10px;height:10px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(45deg);transition:transform .18s}
+.banner{cursor:pointer;user-select:none;position:relative;padding-right:54px}
+.banner:hover{background:var(--panel2)}
+.banner .chev{position:absolute;right:20px;top:30px;color:var(--ac,#fff);width:12px;height:12px}
+.banner .hint{display:block;font-family:"Azeret Mono",monospace;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);margin-top:10px}
+section.collapsed .banner{margin-bottom:0}
+section.collapsed .banner .chev{transform:rotate(-45deg)}
+section.collapsed .chapter-body{display:none}
+
+.subctl{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0 2px}
+.mini{font-family:"Azeret Mono",monospace;font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--dim);background:var(--panel);border:1px solid var(--line);padding:9px 12px;min-height:36px;cursor:pointer}
+.mini:hover{color:#fff;border-color:var(--edge)}
+
+.sh{cursor:pointer;user-select:none;position:relative;padding-right:26px}
+.sh .chev{position:absolute;right:0;top:9px;color:var(--ac,#fff);width:9px;height:9px}
+.step.folded .step-body{display:none}
+.step.folded{padding-bottom:13px}
+.step.folded .chev{transform:rotate(-45deg)}
+
+h3.fold{cursor:pointer;user-select:none;position:relative;padding-right:30px}
+h3.fold .chev{position:absolute;right:2px;top:11px;color:var(--ac,#fff)}
+.sub.folded .sub-body{display:none}
+.ph-head{cursor:pointer;user-select:none;position:relative;padding-right:26px}
+.ph-head .chev{position:absolute;right:0;top:6px;color:var(--ac,#fff);width:9px;height:9px}
+.tli.folded .step-body{display:none}
+.tli.folded{padding-bottom:14px}
+.tli.folded .chev{transform:rotate(-45deg)}
+.sub.folded h3.fold{margin-bottom:0}
+.sub.folded .chev{transform:rotate(-45deg)}
+
 .tw{overflow-x:auto;margin:18px 0;-webkit-overflow-scrolling:touch}
 table{border-collapse:collapse;width:100%;min-width:520px;font-size:15.5px}
 th,td{border:1px solid var(--line);padding:9px 11px;text-align:left;vertical-align:top}
@@ -132,6 +163,9 @@ footer{border-top:1px solid var(--line);margin-top:50px;padding-top:20px;color:v
 @media print{
   body{background:#fff;color:#000;background-image:none}
   nav,.btn,.chk,.bar{display:none}
+  section.collapsed .chapter-body,.step.folded .step-body,.sub.folded .sub-body,.tli.folded .step-body{display:block !important}
+  .chev,.subctl,.banner .hint{display:none !important}
+  .banner{padding-right:20px}
   .banner{border-top:4px solid #000;background:#fff;page-break-before:always}
   .panel,.calc,.step,.o{background:#fff;border:1px solid #000}
   h1.big,h2,.st,.tli .what{color:#000}
@@ -147,6 +181,8 @@ footer{border-top:1px solid var(--line);margin-top:50px;padding-top:20px;color:v
   <h1 class="big">Do this, <span>in this order</span>.</h1>
   <p class="standfirst">The full strategy, converted into steps you can start on Monday. Six sections: marketing, business, office growth, recruiting, the sequenced plan that runs them, and the founder advice underneath it. Every step has a done-when test, so you always know whether to move on.</p>
   <p class="standfirst" style="font-size:16px;color:var(--dim)">One rule above all of them: <b>a step is not finished when you have done it once. It is finished when it is boring.</b> Do not start the next thing until the last thing runs without you thinking about it.</p>
+  <button class="btn" id="openAll">Expand all</button>
+  <button class="btn" id="shutAll">Collapse all</button>
   <button class="btn" id="printBtn">Print / save as PDF</button>
   <button class="btn" id="resetBtn">Reset checkboxes</button>
 </header>
@@ -1404,7 +1440,9 @@ Implementation guide derived from Full Strategy v2.0. Planning document - not le
     });
   }
   var printBtn = document.getElementById("printBtn");
-  if (printBtn){ printBtn.addEventListener("click", function(){ window.print(); }); }
+  if (printBtn){
+    printBtn.addEventListener("click", function(){ setAll(false); window.print(); });
+  }
 
   // ---- recruiting calculator ----
   function val(id){
@@ -1467,6 +1505,153 @@ Implementation guide derived from Full Strategy v2.0. Planning document - not le
   }
   window.addEventListener("scroll", spy, { passive: true });
   spy();
+
+  // ---- collapse / expand: chapters and sections ----
+  function chev(){
+    var c = document.createElement("span");
+    c.className = "chev";
+    return c;
+  }
+
+  var sections = Array.prototype.slice.call(document.querySelectorAll("section[id]"));
+
+  sections.forEach(function(sec){
+    var banner = sec.querySelector(".banner");
+    if (!banner){ return; }
+
+    // 1. move everything after the banner into a chapter body
+    var body = document.createElement("div");
+    body.className = "chapter-body";
+    while (banner.nextSibling){ body.appendChild(banner.nextSibling); }
+    sec.appendChild(body);
+
+    // 2. sub-level A: h3 subsections (used by chapter 06)
+    var heads = Array.prototype.slice.call(body.querySelectorAll("h3"));
+    heads.forEach(function(h){
+      var wrap = document.createElement("div");
+      wrap.className = "sub";
+      h.parentNode.insertBefore(wrap, h);
+      wrap.appendChild(h);
+      var sub = document.createElement("div");
+      sub.className = "sub-body";
+      while (wrap.nextSibling && wrap.nextSibling.nodeName !== "H3"){
+        sub.appendChild(wrap.nextSibling);
+      }
+      wrap.appendChild(sub);
+      h.classList.add("fold");
+      h.appendChild(chev());
+      h.addEventListener("click", function(){
+        wrap.classList.toggle("folded");
+      });
+    });
+
+    // 3. sub-level B: step cards (used by chapters 01-04)
+    var steps = Array.prototype.slice.call(body.querySelectorAll(".step"));
+    steps.forEach(function(st){
+      var head = st.querySelector(".sh");
+      if (!head){ return; }
+      var sb = document.createElement("div");
+      sb.className = "step-body";
+      while (head.nextSibling){ sb.appendChild(head.nextSibling); }
+      st.appendChild(sb);
+      head.appendChild(chev());
+      head.addEventListener("click", function(){
+        st.classList.toggle("folded");
+      });
+    });
+
+    // 3b. sub-level C: timeline phases (used by chapter 05)
+    var phases = Array.prototype.slice.call(body.querySelectorAll(".tli"));
+    phases.forEach(function(ph){
+      var when = ph.querySelector(".when");
+      var what = ph.querySelector(".what");
+      if (!when || !what){ return; }
+      var head = document.createElement("div");
+      head.className = "ph-head";
+      ph.insertBefore(head, when);
+      head.appendChild(when);
+      head.appendChild(what);
+      var pb = document.createElement("div");
+      pb.className = "step-body";
+      while (head.nextSibling){ pb.appendChild(head.nextSibling); }
+      ph.appendChild(pb);
+      head.appendChild(chev());
+      head.addEventListener("click", function(){
+        ph.classList.toggle("folded");
+      });
+    });
+
+    // 4. per-chapter controls, only where there is a sub-level
+    var units = heads.length || steps.length || phases.length;
+    if (units > 1){
+      var ctl = document.createElement("div");
+      ctl.className = "subctl";
+      var lbl = heads.length ? "sections" : (steps.length ? "steps" : "phases");
+      ctl.innerHTML = '<button class="mini" data-act="open">Expand all ' + units + " " + lbl +
+                      '</button><button class="mini" data-act="shut">Collapse ' + lbl + "</button>";
+      body.insertBefore(ctl, body.firstChild);
+      ctl.addEventListener("click", function(e){
+        var b = e.target.closest ? e.target.closest("button") : null;
+        if (!b){ return; }
+        var shut = b.getAttribute("data-act") === "shut";
+        heads.forEach(function(h){ h.parentNode.classList.toggle("folded", shut); });
+        steps.forEach(function(st){ st.classList.toggle("folded", shut); });
+        phases.forEach(function(ph){ ph.classList.toggle("folded", shut); });
+      });
+    }
+
+    // 5. the banner is the chapter toggle
+    var hint = document.createElement("span");
+    hint.className = "hint";
+    hint.textContent = units
+      ? units + " " + (heads.length ? "sections" : (steps.length ? "steps" : "phases")) + " - tap to open"
+      : "tap to open";
+    banner.appendChild(hint);
+    banner.appendChild(chev());
+    banner.addEventListener("click", function(){
+      sec.classList.toggle("collapsed");
+    });
+
+    sec.classList.add("collapsed");
+  });
+
+  function setAll(collapsed){
+    sections.forEach(function(sec){ sec.classList.toggle("collapsed", collapsed); });
+    Array.prototype.forEach.call(document.querySelectorAll(".sub"), function(x){
+      x.classList.toggle("folded", false);
+    });
+    Array.prototype.forEach.call(document.querySelectorAll(".step, .tli"), function(x){
+      x.classList.toggle("folded", false);
+    });
+  }
+  var oa = document.getElementById("openAll");
+  var sa = document.getElementById("shutAll");
+  if (oa){ oa.addEventListener("click", function(){ setAll(false); }); }
+  if (sa){ sa.addEventListener("click", function(){ setAll(true); }); }
+
+  // opening a chapter from the nav or a cross-link
+  function reveal(id){
+    var t = document.getElementById(id);
+    if (t && t.classList.contains("collapsed")){ t.classList.remove("collapsed"); }
+    return t;
+  }
+  links.forEach(function(a){
+    a.addEventListener("click", function(){
+      reveal(a.getAttribute("href").slice(1));
+    });
+  });
+  Array.prototype.forEach.call(document.querySelectorAll('a[href^="#"]'), function(a){
+    a.addEventListener("click", function(){
+      reveal(a.getAttribute("href").slice(1));
+    });
+  });
+  if (location.hash.length > 1){
+    var t = reveal(location.hash.slice(1));
+    if (t){ setTimeout(function(){ t.scrollIntoView(); }, 30); }
+  }
+
+  // printing must never hide content
+  window.addEventListener("beforeprint", function(){ setAll(false); });
 })();
 </script>
 </body>
